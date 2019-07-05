@@ -7,6 +7,12 @@ class MainspyderSpider(scrapy.Spider):
     allowed_domains = ['finanznachrichten.de']
     start_urls = ['http://www.finanznachrichten.de/nachrichten-medien/archiv-dpa-afx-1.htm']
     
+
+    def extractText(self, response): 
+        dateText= response.css('#DateTimeReaders::text').extract()
+        text = response.css('.inhalte-text::text').extract()
+        print(text)
+
     def parse_dir_contents(self, response):    
         for quote in response.css('.hoverable  a::attr(href)').extract():
             url = response.urljoin(quote)

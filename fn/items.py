@@ -10,5 +10,7 @@ import scrapy
 
 class FnItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    date = scrapy.Field()
+    time = scrapy.Field()
+    text = scrapy.Field()
+    
