@@ -8,8 +8,9 @@ class MainspyderSpider(scrapy.Spider):
     start_urls = ['http://www.finanznachrichten.de/nachrichten-medien/archiv-dpa-afx-1.htm']
     
     def parse_dir_contents(self, response):    
-        for quote in response.css('.zentriert > a'):
-            yield {'quote': quote.extract()}
+        for quote in response.css('.hoverable  a::attr(href)').extract():
+            url = response.urljoin(quote)
+            yield scrapy.Request(url=url, callback = self.extractText)
 
 
     def parse(self, response):
